@@ -15,43 +15,6 @@ class NguoiDung{
             echo 'Lỗi:'.$e->getMessage();
         }
     }
-
-    //thêm vào csdl
-    public function postData($ten, $email, $dia_chi,$phone,$pass,$ngay_tao,$gioi_tinh,$avartar,$vai_tro, $trang_thai){
-        try {
-           
-            $sql='INSERT INTO nguoi_dungs (ten, email, dia_chi,phone,pass,ngay_tao,gioi_tinh,avartar,vai_tro, trang_thai)
-            VALUES (:ten, :email, :dia_chi, :phone, :pass, :ngay_tao, :gioi_tinh, :avartar, :vai_tro, :trang_thai)';
-            $stmt = $this->conn->prepare($sql);
-           
-            $stmt->bindParam(':ten', $ten);
-            $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':dia_chi', $dia_chi);
-            $stmt->bindParam(':phone', $phone);
-            $stmt->bindParam(':pass', $pass);
-            $stmt->bindParam(':ngay_tao', $ngay_tao);
-            $stmt->bindParam(':gioi_tinh', $gioi_tinh);
-            $stmt->bindParam(':avartar', $avartar);
-            $stmt->bindParam(':vai_tro', $vai_tro);
-            $stmt->bindParam(':trang_thai', $trang_thai);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo 'Lỗi:'.$e->getMessage();
-        }
-    }
-    public function deleteData($id){
-        try {
-            $sql='DELETE FROM `nguoi_dungs` WHERE id= :id';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id',$id);
-            $stmt->execute();
-            return true;
-        } catch (PDOException $e) {
-            echo 'Lỗi:'.$e->getMessage();
-        } 
-    }
-    
     public function getDetailData($id){
         try {
             $sql = 'SELECT * FROM nguoi_dungs where id = :id';
@@ -64,9 +27,6 @@ class NguoiDung{
             echo 'lỗi ' .$e->getMessage();
         }
     }
-   
-   
-
     public function updateData($nguoi_dung_id,$ten, $email, $dia_chi,$phone,$pass,$ngay_tao,$gioi_tinh,$avartar,$vai_tro, $trang_thai){
         try {
             $sql = 'UPDATE nguoi_dungs SET
@@ -106,36 +66,7 @@ class NguoiDung{
             return false;
         }
     }
-    
-    public function checkLogin($email, $pass) {
-        try {
-            $sql = 'SELECT * FROM nguoi_dungs WHERE email = :email';
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute(['email' => $email]);
-    
-            $user = $stmt->fetch();
-    
-            if ($user) {
-                
-                if ($pass === $user['pass']) {
-                    // Kiểm tra trạng thái tài khoản
-                    if ($user['trang_thai'] == 1) {
-                        return $user; // Trả về thông tin user
-                    } else {
-                        return "Tài khoản của bạn đã bị cấm.";
-                    }
-                } else {
-                    return "Mật khẩu không chính xác.";
-                }
-            } else {
-                return "Email không tồn tại.";
-            }
-        } catch (Exception $e) {
-            echo 'Lỗi: ' . $e->getMessage();
-            return false;
-        }
-    }
-
+    //thêm vào csdl
     public function isEmailExists($email) {
         $sql = 'SELECT id FROM nguoi_dungs WHERE email = :email LIMIT 1';
         $stmt = $this->conn->prepare($sql);
@@ -233,6 +164,5 @@ public function checkCurrentPassword($nguoi_dung_id, $current_password)
     
     return false;
 }
-
 
         }
