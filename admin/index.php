@@ -20,5 +20,13 @@ match ($act) {
     // Dashboards
     '/'                 => (new DashboardController())->index(),
     'nguoi-dung'           => (new NguoiDungtController() )->index(),
+'detail-tai-khoan' =>(new NguoiDungtController)->formDetail(),
+    'update-tai-khoan' =>(new NguoiDungtController)->updateAcc(),
+    'form-password' =>(new NguoiDungtController)->formPassword(),
+    'update-password' =>(new NguoiDungtController)->updatePassword(),
+    
+    'dang-ki'=>(new NguoiDungtController)->formDangki(),
+    'check-dang-ki'=>(new NguoiDungtController)->DangKi(),
+    'dang-ki-thanh-cong'=>(new NguoiDungtController)->formDangkiThanhCong(),
 
 };

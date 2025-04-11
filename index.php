@@ -8,6 +8,8 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 require_once './controllers/HomeController.php';
 
 // Require toàn bộ file Models
+require_once './models/SanPham.php';
+require_once './models/SlideModel.php';
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -16,5 +18,6 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     // Trang chủ
-    '/'                 => (new HomeController())->index(),
+   '/' => (new ListController())->home(),
+    'list-san-pham' => (new ListController())->listProduct(),
 };
