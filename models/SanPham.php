@@ -141,4 +141,76 @@ class ListSanPham
             return 0; // Trả về 0 nếu có lỗi
         }
     }
+    public function getProductById($id) {
+        try {
+            $sql = "SELECT san_phams.*, danh_mucs.ten_danh_muc
+                    FROM san_phams
+                    INNER JOIN danh_mucs ON san_phams.danh_muc_id = danh_mucs.id
+                    WHERE san_phams.id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về sản phẩm
+        } catch (Throwable $th) {
+            error_log($th->getMessage());
+            return []; // Nếu có lỗi, trả về false
+        }
+    }
+    public function getListAnhSanPham($id){
+        try{
+            $sql= 'SELECT * FROM hinh_anh_san_phams WHERE san_pham_id =:id';
+            $stmt= $this->conn->prepare($sql);
+            $stmt->execute([':id'=>$id]);
+            return $stmt->fetchAll();
+        }catch (Exception $e) {
+            echo 'Lỗi' . $e->getMessage();
+    
+        }
+    }
+    public function getBinhLuanFromSanPham($id) {
+        try {
+            $sql = 'SELECT binh_luans.*, nguoi_dungs.ten
+                    FROM binh_luans
+                    INNER JOIN nguoi_dungs ON binh_luans.nguoi_dung_id = nguoi_dungs.id
+                    WHERE binh_luans.san_pham_id = :id';  // Corrected to use san_pham_id
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetchAll();  // Fetch all reviews for the specified product
+        } catch (Exception $e) {
+            echo 'Lỗi: ' . $e->getMessage();
+        }
+    }
+    
+    public function addComment($idProduct, $idUser, $content) {
+        // Use prepared statement for secure query execution
+        $sql = "INSERT INTO binh_luans (san_pham_id, nguoi_dung_id, noi_dung) VALUES (?, ?, ?)";
+        // var_dump($sql); exit();
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute([$idProduct, $idUser, $content]);
+    }
+    public function restoreProductQuantity($productId, $quantity) {
+        try {
+            $sql = "UPDATE san_phams SET so_luong = so_luong + :quantity WHERE id = :productId";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':quantity' => $quantity, ':productId' => $productId]);
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
+    public function updateSoLuongSP($id ,$so_luong){
+        try {
+            $sql = "UPDATE san_phams
+                    SET so_luong = :so_luong
+                    WHERE  id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id',$id);
+            $stmt->bindParam(':so_luong',$so_luong);
+            // $stmt->execute([':so_luong' => $so_luong]);
+            $stmt->execute();
+            return true;
+        } catch (Exception $e) {
+            echo "Lỗi: " . $e->getMessage();
+        }
+    }
 }

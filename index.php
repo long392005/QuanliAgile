@@ -20,4 +20,7 @@ match ($act) {
     // Trang chủ
    '/' => (new ListController())->home(),
     'list-san-pham' => (new ListController())->listProduct(),
+'chi-tiet-san-pham' => (new ListController())->detailProduct(),
+    'them-binh-luan' => (new ListController())->addComment(),
+
 };
