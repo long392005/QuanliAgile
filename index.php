@@ -6,10 +6,13 @@ require_once './commons/function.php'; // Hàm hỗ trợ
 
 // Require toàn bộ file Controllers
 require_once './controllers/HomeController.php';
-
-// Require toàn bộ file Models
+require_once './controllers/DashboardController.php';
+require_once './controllers/AdminSanPhamController.php';
+// Require toàn bộ file Model
+require_once './models/AdminSanPham.php';
 require_once './models/SanPham.php';
 require_once './models/SlideModel.php';
+
 
 // Route
 $act = $_GET['act'] ?? '/';
@@ -18,9 +21,10 @@ $act = $_GET['act'] ?? '/';
 
 match ($act) {
     // Trang chủ
-   '/' => (new ListController())->home(),
+'/' => (new ListController())->home(),
     'list-san-pham' => (new ListController())->listProduct(),
-'chi-tiet-san-pham' => (new ListController())->detailProduct(),
+    'chi-tiet-san-pham' => (new ListController())->detailProduct(),
     'them-binh-luan' => (new ListController())->addComment(),
 
 };
+
