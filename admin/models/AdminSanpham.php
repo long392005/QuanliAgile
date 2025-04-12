@@ -49,4 +49,43 @@ class AdminSanPham {
             echo 'Lỗi: ' . $e->getMessage();
         }
     }
+    public function UpdateSanPham($san_pham_id, $ma_san_pham, $ten_san_pham, $gia_nhap, $gia_san_pham, $so_luong, $luot_xem, $ngay_nhap, $danh_muc_id, $trang_thai, $mo_ta, $hinh_anh) {
+        try {
+            $sql = 'UPDATE san_phams SET 
+                        ma_san_pham = :ma_san_pham,
+                        ten_san_pham = :ten_san_pham,
+                        gia_nhap = :gia_nhap,
+                        gia_san_pham = :gia_san_pham,
+                        so_luong = :so_luong,
+                        luot_xem = :luot_xem,
+                        ngay_nhap = :ngay_nhap,
+                        danh_muc_id = :danh_muc_id,
+                        trang_thai = :trang_thai,
+                        mo_ta = :mo_ta,
+                        hinh_anh = :hinh_anh
+                    WHERE id = :san_pham_id';
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':san_pham_id' => $san_pham_id,
+                ':ma_san_pham' => $ma_san_pham,
+                ':ten_san_pham' => $ten_san_pham,
+                ':gia_nhap' => $gia_nhap,
+                ':gia_san_pham' => $gia_san_pham,
+                ':so_luong' => $so_luong,
+                ':luot_xem' => $luot_xem,
+                ':ngay_nhap' => $ngay_nhap,
+                ':danh_muc_id' => $danh_muc_id,
+                ':trang_thai' => $trang_thai,
+                ':mo_ta' => $mo_ta,
+                ':hinh_anh' => $hinh_anh,
+            ]);
+    
+            return true;
+        } catch (PDOException $e) {
+            echo 'Lỗi SQL: ' . $e->getMessage();
+            return false;
+        }
+    }
+
 }
