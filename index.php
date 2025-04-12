@@ -23,10 +23,6 @@ match ($act) {
     'chi-tiet-san-pham' => (new AdminSanPhamController())->detailSanpham(), 
     'cap-nhat-san-pham' => (new AdminSanPhamController())->formEditSanpham(),       
 }
-   '/' => (new ListController())->home(),
-    'list-san-pham' => (new ListController())->listProduct(),
-'chi-tiet-san-pham' => (new ListController())->detailProduct(),
-    'them-binh-luan' => (new ListController())->addComment(),
+   
 
-};
-
+?>
