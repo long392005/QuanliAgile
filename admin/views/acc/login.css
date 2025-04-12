@@ -1,0 +1,52 @@
+/* body {
+    background: linear-gradient(135deg, #4b6cb7, #182848);
+    font-family: Arial, sans-serif;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.card {
+    border-radius: 12px;
+}
+
+.card-header {
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 12px 12px 0 0;
+}
+
+.btn-primary {
+    background-color: #1f77b4;
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #155e8d;
+    transition: all 0.3s ease;
+}
+
+.login-box-msg {
+    font-size: 1rem;
+    color: #6c757d;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.form-control {
+    border-radius: 6px;
+}
+
+input::placeholder {
+    color: #a9a9a9;
+}
+
+input:focus {
+    border-color: #1f77b4;
+    box-shadow: 0 0 8px rgba(31, 119, 180, 0.3);
+} */
