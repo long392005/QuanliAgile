@@ -42,4 +42,11 @@ match ($act) {
     'check-dang-ki'=>(new NguoiDungtController)->DangKi(),
     'dang-ki-thanh-cong'=>(new NguoiDungtController)->formDangkiThanhCong(),
 
+
+    'san-pham' => (new AdminSanPhamController())->index(),
+'form-sua-san-pham' => (new AdminSanPhamController())->formEditSanpham(),
+    'sua-san-pham' => (new AdminSanPhamController())->postEditSanpham(),
+    'xoa-san-pham' => (new AdminSanPhamController())->deleteSanpham(),
+    'chi-tiet-san-pham' => (new AdminSanPhamController)->detailSanpham(),
+
 };
